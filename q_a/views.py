@@ -7,7 +7,7 @@ from .models import Question
 
 
 @login_required(login_url='signin')
-def post_query(request):
+def add_question(request):
 
     if request.method == 'POST':
         user = request.user.username
