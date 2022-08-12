@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'users',
     'q_a',
     'search',
+    'taggit',
 ]
 
 MIDDLEWARE = [
