@@ -21,3 +21,5 @@ def add_question(request):
         return redirect('/')
     else:
         return redirect('/')
+
+
