@@ -6,11 +6,10 @@ User=get_user_model()
 
 # Create your models here.
 class Profile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    id_user = models.IntegerField() 
-    created_at=models.DateTimeField(default=datetime.now)
-    profileimg = models.ImageField(
-        upload_to='profile_image', default='default_profile_image.jpg')
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profileimg = models.ImageField(upload_to='profile_image', default='-9g1w51.jpg.jpg')
+    bio = models.CharField(max_length=1000)
+    mobile_no = models.IntegerField()
 
     def __str__(self):
-        return self.user.username
+        return f'{self.user.username} - Profile'

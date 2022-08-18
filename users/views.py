@@ -19,7 +19,7 @@ def signup(request):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f"Welcome to R_Solutions {username}, please sign-in to continue")
-            return redirect('base:home')
+            return redirect('users:signin')
     else:
         form = UserSignupForm()
     return render(request, 'signup.html', {'form': form})
