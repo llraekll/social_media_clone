@@ -15,7 +15,7 @@
 
 html {
   background-color: #e7e7e7;
-  background: linear-gradient(200deg, yellow 0%, rgb(236, 146, 0) 100%);
+  background: linear-gradient(200deg, black 0%, teal 100%);
 }
 
 body {
@@ -57,7 +57,7 @@ h2 {
 #formContent {
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
-  background: #fff;
+  background: linear-gradient(200deg, black 25%, teal 75%);
   padding: 30px;
   width: 90%;
   max-width: 450px;
@@ -286,7 +286,7 @@ a{
         <div id="formContent">
           <!-- Tabs Titles -->
           <h2 class="active"><a href="" style="text-decoration: none;">Sign In</a> </h2>
-          <h2 class="inactive underlineHover"> <a href="" style="text-decoration: none;">Sign Up</a> </h2>
+          <h2 class="inactive underlineHover"> <a href="signup" style="text-decoration: none;">Sign Up</a> </h2>
 
       
           <!-- Icon -->
@@ -310,7 +310,7 @@ a{
     
           <!-- Remind Passowrd -->
           <div id="formFooter">
-            <p>Don't have an account yet? <a class="underlineHover" href="{% url 'register' %}">Sign UP </a></p>
+            <p>Don't have an account yet? <a class="underlineHover" href="signup">Sign UP </a></p>
           </div>
       
         </div>

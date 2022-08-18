@@ -16,7 +16,7 @@
 
 html {
   background-color: #e7e7e7;
-  background: linear-gradient(200deg, yellow 0%, rgb(236, 146, 0) 100%);
+  background: linear-gradient(200deg, rgb(0, 0, 0) 25%, teal 75%);
 }
 
 body {
@@ -25,7 +25,7 @@ body {
 }
 
 a {
-  color: #92badd;
+  color: #0464b9;
   display:inline-block;
   text-decoration: none;
   font-weight: 400;
@@ -58,14 +58,14 @@ h2 {
 #formContent {
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
-  background: #fff;
+  background: linear-gradient(200deg, rgb(5, 151, 151) 25%, white 75%);;
   padding: 30px;
   width: 90%;
   max-width: 450px;
   position: relative;
   padding: 0px;
-  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
-  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0 30px 60px 0 black;
+  box-shadow: 0 30px 60px 0 rgb(6, 84, 84);
   text-align: center;
 }
 
@@ -87,7 +87,7 @@ h2.inactive {
 }
 
 h2.active {
-  color: #0d0d0d;
+  color: #ffffff;
   border-bottom: 2px solid #5fbae9;
 }
 
@@ -96,7 +96,7 @@ h2.active {
 /* FORM TYPOGRAPHY*/
 
 input[type=button], input[type=submit], input[type=reset]  {
-  background-color: #56baed;
+  background-color: #00aaff;
   border: none;
   color: white;
   padding: 15px 80px;
@@ -105,8 +105,8 @@ input[type=button], input[type=submit], input[type=reset]  {
   display: inline-block;
   text-transform: uppercase;
   font-size: 13px;
-  -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
-  box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+  -webkit-box-shadow: 0 10px 30px 0 rgba(255, 0, 0, 0.4);
+  box-shadow: 0 10px 30px 0 teal;
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
   margin: 5px 20px 40px 20px;
@@ -132,7 +132,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
 input[type=text] {
   background-color: #f6f6f6;
   border: none;
-  color: #0d0d0d;
+  color: goldenrod;
   padding: 10px 32px;
   text-align: center;
   text-decoration: none;
@@ -288,7 +288,7 @@ a{
         <div id="formContent">
           <!-- Tabs Titles -->
           <h2 class="active"> <a href="" style="text-decoration: none;">Sign Up</a> </h2>
-          <h2 class="inactive underlineHover"><a href="" style="text-decoration: none;">Sign In</a> </h2>
+          <h2 class="inactive underlineHover"><a href="signin" style="text-decoration: none;">Sign In</a> </h2>
 
       
           <!-- Icon -->
@@ -312,7 +312,7 @@ a{
       
           <!-- Remind Passowrd -->
           <div id="formFooter">
-            <p>Already have an account? <a class="underlineHover" href="">Sign In </a></p>
+            <p>Already have an account? <a class="underlineHover" href="signin">Sign In </a></p>
           </div>
       
         </div>
