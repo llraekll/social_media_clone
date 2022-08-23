@@ -18,7 +18,7 @@ class Question(models.Model):
         return f'{self.user.username} - Question'
 
     def get_absolute_url(self):
-        return reverse('q_a:question-deatils', kwargs={'pk':self.pk})
+        return reverse('q_a:question-details', kwargs={'pk':self.pk})
 
 
 

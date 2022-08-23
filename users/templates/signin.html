@@ -285,8 +285,8 @@ a{
     <div class="wrapper fadeInDown">
         <div id="formContent">
           <!-- Tabs Titles -->
-          <h2 class="active"><a href="" style="text-decoration: none;">Sign In</a> </h2>
-          <h2 class="inactive underlineHover"> <a href="signup" style="text-decoration: none;">Sign Up</a> </h2>
+          <h2 class="active"><a href="{% url 'users:signin' %}" style="text-decoration: none;">Sign In</a> </h2>
+          <h2 class="inactive underlineHover"> <a href="{% url 'users:signup' %}" style="text-decoration: none;">Sign Up</a> </h2>
 
       
           <!-- Icon -->
@@ -310,7 +310,7 @@ a{
     
           <!-- Remind Passowrd -->
           <div id="formFooter">
-            <p>Don't have an account yet? <a class="underlineHover" href="signup">Sign UP </a></p>
+            <p>Don't have an account yet? <a class="underlineHover" href="{% url 'users:signup' %}">Sign UP </a></p>
           </div>
       
         </div>

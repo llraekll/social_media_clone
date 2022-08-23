@@ -2,51 +2,43 @@ from turtle import title
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Question
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 
 # Create your views here.
 
 
-@login_required(login_url='signin')
-def add_question(request):
 
-    if request.method == 'POST':
-        user = request.user.username
-        image = request.FILES.get('image_upload')
-        title = request.POST['title']
-        description = request.POST['description']
 
-        new_query = Question.objects.create(user=user, image=image, title=title, description=description)
-        new_query.save()
-
-        return redirect('/')
-    else:
-        return redirect('/')
 
 class Questions(ListView):
-    model= Question
-    template_name = 'question_list.html' # template_name must be mentioned for class based views in django
-    context_object_name = 'questions' # this is the name used for looping in html and for the .title & .description
+    model = Question
+    # template_name must be mentioned for class based views in django
+    template_name = 'question_list.html'
+    # this is the name used for looping in html and for the .title & .description
+    context_object_name = 'questions'
     ordering = ['-created_at']
 
+
 class QuestionDetailView(DetailView):
-    model= Question
+    model = Question
     template_name = 'question_detail.html'
 
-class QuestionCreateView(CreateView):
+
+class QuestionCreateView(LoginRequiredMixin, CreateView):
     model = Question
-    fields =['title', 'description', 'image']
+    fields = ['title', 'description', 'image']
     template_name = 'question_form.html'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super().form_valid(form) 
+        return super().form_valid(form)
 
-class QuestionUpdateView(UserPassesTestMixin, UpdateView):
+
+class QuestionUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = Question
-    fields =['title', 'description', 'image']
+    fields = ['title', 'description', 'image']
     template_name = 'question_update.html'
 
     def test_func(self):
@@ -56,6 +48,16 @@ class QuestionUpdateView(UserPassesTestMixin, UpdateView):
         else:
             return False
 
-    # def form_valid(self, form):
-    #     form.instance.user = self.request.user
-    #     return super().form_valid(form) 
+
+class QuestionDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
+    model = Question
+    template_name = 'question_confirm_delete.html'
+    ontext_object_name = 'questions'
+    success_url = '/'
+
+    def test_func(self):
+        question = self.get_object()
+        if self.request.user == question.user:
+            return True
+        else:
+            return False

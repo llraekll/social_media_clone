@@ -95,7 +95,7 @@
                     <hr>
                     <h6 id="fh6">{{ question.description|safe }}</h6>
                     <hr>
-                    <h6 id="fh6" style="font-size: 10px; font-style: italic; color: rgb(155, 155, 155); text-align: right;">Asked By: <a href="profile">{{ object.user|title }}</a>&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; On: {{ object.created_at|date:"F j, Y" }}</h6>
+                    <h6 id="fh6" style="font-size: 10px; font-style: italic; color: rgb(155, 155, 155); text-align: right;">Asked By: <a href="{% url 'users:profile' %}">{{ object.user|title }}</a>&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; On: {{ object.created_at|date:"F j, Y" }}</h6>
                     <br>
                         <form action="" method="POST">
                             {% csrf_token %}
@@ -110,11 +110,12 @@
                                     </div>
                                 {% endif %}
                             {% else %}
-                                <h5 style="margin-left: 10px; cursor: pointer;"><a href="login">Login</a> to vote Question |  {{ total_votes }} votes</h5>
+                                <h5 style="margin-left: 10px; cursor: pointer;"><a href="{% url 'users:signin' %}">Sign In</a> to vote Question |  {{ total_votes }} votes</h5>
                             {% endif %}
 
                         </form>
                     <br>
+                    
                     <h2>Answers...</h2> <br><br><br>
 
                     {% if not question.comment.all %}
@@ -155,13 +156,13 @@
                             </div>
                         {% endif %}
                         {% else %}
-                            <h5 style="margin-left: 10px; cursor: pointer;"><a href="{% url 'login' %}">Login</a> to Like Question |  {{ total_likes }} Likes</h5>
+                            <h5 style="margin-left: 10px; cursor: pointer;"><a href="">Login</a> to Like Question |  {{ total_likes }} Likes</h5>
                         {% endif %}
                     </form> -->
                     
                     <a class="btn btn-outline-primary" id="fa" href="" style="text-decoration: none;">Answer Question</a>
                     <a style="text-decoration: none; " class="btn btn-outline-success" href="{% url 'q_a:question-update' question.id %}">&#x270E;</a>
-                    <a style="text-decoration: none; " class="btn btn-outline-danger" href="">&#x2716;</a>
+                    <a style="text-decoration: none; " class="btn btn-outline-danger" href="{% url 'q_a:question-delete' question.id %}">&#x2716;</a>
                     <a style="text-decoration: none; " class="btn btn-outline-secondary" href="{% url 'q_a:list' %}">&#x21a9;</a>
                 </div> <br><br>
                     <!-- Answer Section -->
