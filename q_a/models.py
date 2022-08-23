@@ -1,6 +1,5 @@
-from multiprocessing.spawn import old_main_modules
 from django.db import models
-import uuid
+from django.urls import reverse
 from datetime import datetime
 from django.contrib.auth.models import User 
 
@@ -18,18 +17,10 @@ class Question(models.Model):
     def __str__(self):
         return f'{self.user.username} - Question'
 
-
-class UpVote(models.Model):
-    query_id = models.CharField(max_length=500)
-    username = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.username
+    def get_absolute_url(self):
+        return reverse('q_a:question-deatils', kwargs={'pk':self.pk})
 
 
-class DownVote(models.Model):
-    query_id = models.CharField(max_length=500)
-    username = models.CharField(max_length=100)
 
-    def __str__(self):
-        return self.username
+    
+    

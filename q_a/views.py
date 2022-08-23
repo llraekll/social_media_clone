@@ -38,3 +38,7 @@ class QuestionCreateView(CreateView):
     model = Question
     fields =['title', 'description', 'image']
     template_name = 'question_form.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form) 
