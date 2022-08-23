@@ -2,7 +2,8 @@ from turtle import title
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Question
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 
 # Create your views here.
@@ -42,3 +43,19 @@ class QuestionCreateView(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form) 
+
+class QuestionUpdateView(UserPassesTestMixin, UpdateView):
+    model = Question
+    fields =['title', 'description', 'image']
+    template_name = 'question_update.html'
+
+    def test_func(self):
+        question = self.get_object()
+        if self.request.user == question.user:
+            return True
+        else:
+            return False
+
+    # def form_valid(self, form):
+    #     form.instance.user = self.request.user
+    #     return super().form_valid(form) 
