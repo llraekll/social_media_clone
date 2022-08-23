@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+# Models have to be registered in admin.py for access on admin site
 
 class Question(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -20,7 +21,20 @@ class Question(models.Model):
     def get_absolute_url(self):
         return reverse('q_a:question-details', kwargs={'pk':self.pk})
 
+class Answer(models.Model):
+    question = models.ForeignKey(Question, related_name="answer", on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    content = models.TextField(null=True, blank=True)
+    created_at= models.DateTimeField(default=datetime.now)
 
+    def __str__(self):
+        return '%s - s%' % (self.question.title, self.question.user)
+
+    def get_absolute_url(self):
+        return reverse('q_a:question-details', kwargs={'pk':self.pk})
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
 
     
     

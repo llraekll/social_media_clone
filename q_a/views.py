@@ -1,9 +1,11 @@
 from turtle import title
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Question
+from .models import Answer, Question
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from .forms import AnswerForm
+from django.urls import reverse_lazy
 
 
 # Create your views here.
@@ -61,3 +63,14 @@ class QuestionDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
             return True
         else:
             return False
+
+
+class AnswerDetailView(DetailView):
+    model= Answer
+    from_class = AnswerForm
+    template_name = 'question_detail.html'
+
+    def form_vaild(self, form):
+        form.instance.question.id = self.kwagrs['pk']
+        return super().form_vaild(form)
+    success_url = reverse_lazy('q_a:question-detail')

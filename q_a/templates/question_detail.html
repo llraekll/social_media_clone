@@ -116,14 +116,14 @@
                         </form>
                     <br>
                     
-                    <h2>Answers...</h2> <br><br><br>
+                    <h2>Answers</h2> <br><br><br>
 
-                    {% if not question.comment.all %}
-                        <h3>No Answers yet... <a href="">Answer Question</a> </h3>
+                    {% if not question.answer.all %}
+                        <h3>No answers yet <a href="">Answer Question</a> </h3>
                     {% else %}
-                        {% for comment in question.comment.all %}
-                            <h3 style="font-weight: normal; font-size: 15px;">{{comment.content|safe}}</h3>
-                            <h3 style="font-size: 10px;">Answered by: <i><a href="">{{comment.name}}</a> - On: {{comment.date_created|date:"j F, Y"}}</i></h3>
+                        {% for answers in question.answer.all %}
+                            <h3 style="font-weight: normal; font-size: 15px;">{{answer.content|safe}}</h3>
+                            <h3 style="font-size: 10px;">Answered by: <i><a href="">{{answer.name}}</a> - On: {{answer.created_at|date:"F j, Y"}}</i></h3>
                             <hr>  
                         {% endfor %}
                     {% endif %}
