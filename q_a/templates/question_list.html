@@ -97,14 +97,15 @@
                 <div class="container" style="background: linear-gradient(to right, rgb(255, 226, 182), rgba(255, 166, 0, 0.027)); padding: 5px; box-shadow: rgba(0, 0, 0, 0.383) 0px 5px 5px 0px; border-radius: 15px;" >
                     <div id="title-sec" style="display: flex; align-items: center;">
                         <!-- <a href='profile'><img src="{{ request.user.profile.image.url }}" style="width: 50px;"></a></img> -->
-                        <h3 id="fh3"><a href="">{{ question.title }}</a></h3>
+                        <h3 id="fh3"><a href="{% url 'q_a:question-deatils' question.id %}">{{ question.title }}</a></h3>
                     </div>
                     <hr>
-                    
-                    
-                    <h6 id="fh6" style="text-align: left;">{{ question.description|truncatewords:100|safe}} <a href=" ">Read More</a></h6> 
-                    
-                    <h6 id="fh6" style="font-size: 10px; font-style: italic; color: rgb(0, 0, 0);">Asked By: <a href='profile'>{{ question.user }}</a>&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; On: {{question.created_at|date:"j F, Y"}}</h6>
+                    {% if question.description|wordcount <= 10 %}
+                    <h6 id="fh6" style="text-align: left;">{{ question.description}}</h6> 
+                    {% else %}
+                    <h6 id="fh6" style="text-align: left;">{{ question.description|truncatewords:100}} <a href="{% url 'q_a:question-deatils' question.id %}">Read More</a></h6> 
+                    {% endif %}
+                    <h6 id="fh6" style="font-size: 10px; font-style: italic; color: rgb(0, 0, 0);">Asked By: <a href='profile'>{{ question.user }}</a>&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; On: {{question.created_at|date:"F j, Y"}}</h6>
                     <h5 style="text-align: right; font-size: 12px; font-style: italic;">Tags</h5>
                 </div> <br>
                 
