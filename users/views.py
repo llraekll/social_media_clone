@@ -109,19 +109,20 @@ def profile(request):
 def update_profile(request):
     if request.method == 'POST':
         user_update = UserUpdateForm(request.POST, instance=request.user)
-        profile_update = ProfileUpdateForm(request.POST,instance=request.user.profile)
+        profile_update = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
         if user_update.is_valid() and profile_update.is_valid():
             user_update.save()
             profile_update.save()
             messages.success(request, f"Your profile is updated")
             return redirect('users:profile')
     else:
-        user_update = UserUpdateForm(request.POST)
-        profile_update = ProfileUpdateForm(request.POST)
+        user_update = UserUpdateForm(request.POST, instance=request.user)
+        profile_update = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+    
 
     forms = {
         'user_update': user_update,
-        'profile_update': profile_update
+        'profile_update': profile_update,
     }
 
     return render(request, 'update_profile.html', forms)

@@ -2,6 +2,8 @@ from turtle import title
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Question
+from django.views.generic import ListView
+
 
 # Create your views here.
 
@@ -22,4 +24,8 @@ def add_question(request):
     else:
         return redirect('/')
 
-
+class Questions(ListView):
+    model= Question
+    template_name = 'question_list.html' # template_name must be mentioned for class based views in django
+    context_object_name = 'questions'
+    ordering = ['-created_at']

@@ -85,31 +85,31 @@
     <div class="container">
         <div id="sub-nav">
             <h1 id="fh1">Top Questions</h1>
-            {% if user.is_authenticated %}
-            <button class="btn" id="logout-btn"><a id="fa" href="{% url 'stackbase:question-create'%}" style="color: white; text-decoration: none;">Ask Question</a></button>
-            {% else %}
-            <button class="btn" id="logout-btn"><a id="fa" href="{% url 'login' %}" style="color: white; text-decoration: none;">Ask Question</a></button>
-            {% endif %}
+            
+            <button class="btn" id="logout-btn"><a id="fa" href="" style="color: white; text-decoration: none;">Ask Question</a></button>
+            
+            <button class="btn" id="logout-btn"><a id="fa" href="" style="color: white; text-decoration: none;">Ask Question</a></button>
+            
         </div>
         <div class="list-question">
             <div class="questions">
                 {% for question in questions %}
                 <div class="container" style="background: linear-gradient(to right, rgb(255, 226, 182), rgba(255, 166, 0, 0.027)); padding: 5px; box-shadow: rgba(0, 0, 0, 0.383) 0px 5px 5px 0px; border-radius: 15px;" >
                     <div id="title-sec" style="display: flex; align-items: center;">
-                        <!-- <a href="{% url 'profile' %}"><img src="{{ request.user.profile.image.url }}" style="width: 50px;"></a></img> -->
-                        <h3 id="fh3"><a href="{% url 'stackbase:question-detail' question.id%}">{{ question.title }}</a></h3>
+                        <!-- <a href='profile'><img src="{{ request.user.profile.image.url }}" style="width: 50px;"></a></img> -->
+                        <h3 id="fh3"><a href="">{{ question.title }}</a></h3>
                     </div>
                     <hr>
-                    {% if question.content|wordcount <= 10 %}
-                    <h6 id="fh6" style="text-align: left;">{{ question.content}}</h6>
-                    {% else %}
-                    <h6 id="fh6" style="text-align: left;">{{ question.content|truncatewords:10}} <a href="{% url 'stackbase:question-detail' question.id%}">Read More</a></h6>
-                    {% endif %}
-                    <h6 id="fh6" style="font-size: 10px; font-style: italic; color: rgb(155, 155, 155);">Asked By: <a href="{% url 'profile' %}">{{ question.user }}</a>&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; On: {{question.date_created|date:"j F, Y"}}</h6>
+                    
+                    
+                    <h6 id="fh6" style="text-align: left;">{{ question.description|truncatewords:100|safe}} <a href=" ">Read More</a></h6> 
+                    
+                    <h6 id="fh6" style="font-size: 10px; font-style: italic; color: rgb(0, 0, 0);">Asked By: <a href='profile'>{{ question.user }}</a>&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; On: {{question.created_at|date:"j F, Y"}}</h6>
                     <h5 style="text-align: right; font-size: 12px; font-style: italic;">Tags</h5>
                 </div> <br>
-                {% endfor %}
+                
             </div>
+            {% endfor %}
         </div>   
     </div>
 </body>
