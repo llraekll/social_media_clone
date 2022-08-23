@@ -23,12 +23,13 @@ class Question(models.Model):
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, related_name="answer", on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # name = models.CharField(max_length=100)
     content = models.TextField(null=True, blank=True)
     created_at= models.DateTimeField(default=datetime.now)
 
     def __str__(self):
-        return '%s - s%' % (self.question.title, self.question.user)
+        return '%s - %s' % (self.question.title, self.question.user)
 
     def get_absolute_url(self):
         return reverse('q_a:question-details', kwargs={'pk':self.pk})

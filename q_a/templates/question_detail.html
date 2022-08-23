@@ -116,14 +116,14 @@
                         </form>
                     <br>
                     
-                    <h2>Answers</h2> <br><br><br>
+                    <h2>Answers-</h2> <br><br><br>
 
                     {% if not question.answer.all %}
-                        <h3>No answers yet <a href="">Answer Question</a> </h3>
+                        <h3>No answers yet <a href="{% url 'q_a:answer' question.id %}">Answer Question</a> </h3>
                     {% else %}
-                        {% for answers in question.answer.all %}
+                        {% for answer in question.answer.all %}
                             <h3 style="font-weight: normal; font-size: 15px;">{{answer.content|safe}}</h3>
-                            <h3 style="font-size: 10px;">Answered by: <i><a href="">{{answer.name}}</a> - On: {{answer.created_at|date:"F j, Y"}}</i></h3>
+                            <h3 style="font-size: 10px;">Answered by: <i><a href="{% url 'users:profile' %}">{{answer.user}}</a> - On: {{answer.created_at|date:"F j, Y"}}</i></h3>
                             <hr>  
                         {% endfor %}
                     {% endif %}
@@ -160,7 +160,7 @@
                         {% endif %}
                     </form> -->
                     
-                    <a class="btn btn-outline-primary" id="fa" href="" style="text-decoration: none;">Answer Question</a>
+                    <a class="btn btn-outline-primary" id="fa" href="{% url 'q_a:answer' question.id %}" style="text-decoration: none;">Answer Question</a>
                     <a style="text-decoration: none; " class="btn btn-outline-success" href="{% url 'q_a:question-update' question.id %}">&#x270E;</a>
                     <a style="text-decoration: none; " class="btn btn-outline-danger" href="{% url 'q_a:question-delete' question.id %}">&#x2716;</a>
                     <a style="text-decoration: none; " class="btn btn-outline-secondary" href="{% url 'q_a:list' %}">&#x21a9;</a>

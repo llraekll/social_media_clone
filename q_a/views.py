@@ -71,6 +71,18 @@ class AnswerDetailView(DetailView):
     template_name = 'question_detail.html'
 
     def form_vaild(self, form):
-        form.instance.question.id = self.kwagrs['pk']
+        form.instance.question.id = self.kwargs['pk']
         return super().form_vaild(form)
     success_url = reverse_lazy('q_a:question-detail')
+
+class AnswerQuestion(CreateView):
+    model= Answer
+    form_class=AnswerForm
+    template_name = 'question-answer.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.question_id = self.kwargs['pk']
+        return super().form_valid(form)
+    success_url = reverse_lazy('q_a:list')
+

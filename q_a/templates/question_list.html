@@ -86,7 +86,7 @@
         <div id="sub-nav">
             <h1 id="fh1">Top Questions</h1>
             {% if user.is_authenticated %}
-            <button class="btn" id="logout-btn"><a id="fa" href="q{% url 'q_a:new-question' %}" style="color: white; text-decoration: none;">Ask Question</a></button>
+            <button class="btn" id="logout-btn"><a id="fa" href="{% url 'q_a:new-question' %}" style="color: white; text-decoration: none;">Ask Question</a></button>
             {% else %}
             <button class="btn" id="logout-btn"><a id="fa" href="{% url 'users:signin' %}" style="color: white; text-decoration: none;">Sign In</a></button>
             {% endif %}
