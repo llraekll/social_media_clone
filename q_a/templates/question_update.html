@@ -178,7 +178,7 @@
                                         </div>
                                         <form action="" method="POST" enctype="multipart/form-data">
                                                 {% csrf_token %}
-                                                {{form|crispy}}
+                                                {{form|crispy}} 
                                                 <button class="btn btn-success" id="logout-btn" type="submit">Update Question</button>
                                                 <a style="text-decoration: none; " class="btn btn-outline-secondary" href="{% url 'q_a:question-details' question.id %}">Cancel</a>
                                                 <!-- <button class="btn btn-secondary" id="logout-btn" type="submit"><a id="fa" href="" style="color: white; text-decoration: none;">Go back</a></button> -->

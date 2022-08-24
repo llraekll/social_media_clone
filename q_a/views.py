@@ -10,8 +10,19 @@ from django.http import HttpResponseRedirect
 # Create your views here.
 
 
-def vote_view(request, pk):
+def vote_view_question(request, pk):
     post = get_object_or_404(Question, id=request.POST.get('question_id'))
+    voted = False
+    if post.votes.filter(id=request.user.id).exists():  #votes here is the model class
+        post.votes.remove(request.user)
+        voted = False
+    else:
+        post.votes.add(request.user)
+        voted = True
+    return HttpResponseRedirect(reverse('q_a:question-details', args=[str(pk)]))
+
+def vote_view_answer(request, pk):
+    post = get_object_or_404(Answer, id=request.POST.get('answer_id'))
     voted = False
     if post.votes.filter(id=request.user.id).exists():  #votes here is the model class
         post.votes.remove(request.user)
@@ -94,6 +105,18 @@ class AnswerDetailView(DetailView):
         form.instance.question.id = self.kwargs['pk']
         return super().form_vaild(form)
     success_url = reverse_lazy('q_a:question-detail')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(AnswerDetailView, self).get_context_data()
+        vote_data = get_object_or_404(Answer, id=self.kwargs['pk'])
+        total_vote = vote_data.total_votes()
+        voted = False
+        if vote_data.votes.filter(id=self.request.user.id).exists():
+            voted = True
+
+        context['total_votes'] = total_vote
+        context['voted'] = voted
+        return context
 
 
 class AnswerQuestion(CreateView):

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     #apps
     'taggit',
     'crispy_forms',
+    'ckeditor'
 ]
 
 MIDDLEWARE = [
