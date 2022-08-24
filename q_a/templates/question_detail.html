@@ -95,15 +95,21 @@
                     <hr>
                     <h6 id="fh6">{{ question.description|safe }}</h6>
                     <hr>
-                    <h6 id="fh6" style="font-size: 10px; font-style: italic; color: rgb(155, 155, 155); text-align: right;">Asked By: <a href="{% url 'users:profile' %}">{{ object.user|title }}</a>&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; On: {{ object.created_at|date:"F j, Y" }}</h6>
+                    <h6 id="fh6" style="font-size: 10px; font-style: italic; color: rgb(0, 0, 0); text-align: right;">Asked By: <a href="{% url 'users:profile' %}">{{ object.user|title }}</a>&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; On: {{ object.created_at|date:"F j, Y" }}</h6>
                     <br>
-                        <form action="" method="POST">
+                        <form action="{% url 'q_a:vote_post' question.pk %}" method="POST">
                             {% csrf_token %}
                             {% if user.is_authenticated %}
-                                {% if liked %}
+                                {% if voted %}
+                                    {% if total_votes == 1 %}
+                                    <div style="display: flex; align-items: center; margin-left: 10px;">
+                                        <button type="submit" name="question_id" value="{{ question.id }}" style="border: none; border-radius: 60px;"><img src="https://image.similarpng.com/very-thumbnail/2020/06/Dislike-icon-transparent-PNG.png" alt="" style="width: 40px;"></button> <h5 style="margin-left: 10px; cursor: pointer;"> |  {{ total_votes }} vote</h5>
+                                    </div>
+                                    {% else %}
                                     <div style="display: flex; align-items: center; margin-left: 10px;">
                                         <button type="submit" name="question_id" value="{{ question.id }}" style="border: none; border-radius: 60px;"><img src="https://image.similarpng.com/very-thumbnail/2020/06/Dislike-icon-transparent-PNG.png" alt="" style="width: 40px;"></button> <h5 style="margin-left: 10px; cursor: pointer;"> |  {{ total_votes }} votes</h5>
                                     </div>
+                                    {% endif %}    
                                 {% else %}
                                     <div style="display: flex; align-items: center; margin-left: 10px;">
                                         <button type="submit" name="question_id" value="{{ question.id }}" style="border: none; border-radius: 30px;"><img src="https://i.pinimg.com/originals/39/44/6c/39446caa52f53369b92bc97253d2b2f1.png" alt="" style="width: 40px;"></button> <h5 style="margin-left: 10px; cursor: pointer;"> |  {{ total_votes }} votes</h5>
@@ -112,7 +118,6 @@
                             {% else %}
                                 <h5 style="margin-left: 10px; cursor: pointer;"><a href="{% url 'users:signin' %}">Sign In</a> to vote Question |  {{ total_votes }} votes</h5>
                             {% endif %}
-
                         </form>
                     <br>
                     

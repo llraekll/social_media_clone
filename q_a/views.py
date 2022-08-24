@@ -1,17 +1,25 @@
-from turtle import title
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 from .models import Answer, Question
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from .forms import AnswerForm
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
+from django.http import HttpResponseRedirect
 
 
 # Create your views here.
 
 
-
+def vote_view(request, pk):
+    post = get_object_or_404(Question, id=request.POST.get('question_id'))
+    voted = False
+    if post.votes.filter(id=request.user.id).exists():  #votes here is the model class
+        post.votes.remove(request.user)
+        voted = False
+    else:
+        post.votes.add(request.user)
+        voted = True
+    return HttpResponseRedirect(reverse('q_a:question-details', args=[str(pk)]))
 
 
 class Questions(ListView):
@@ -26,6 +34,18 @@ class Questions(ListView):
 class QuestionDetailView(DetailView):
     model = Question
     template_name = 'question_detail.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(QuestionDetailView, self).get_context_data()
+        vote_data = get_object_or_404(Question, id=self.kwargs['pk'])
+        total_vote = vote_data.total_votes()
+        voted = False
+        if vote_data.votes.filter(id=self.request.user.id).exists():
+            voted = True
+
+        context['total_votes'] = total_vote
+        context['voted'] = voted
+        return context
 
 
 class QuestionCreateView(LoginRequiredMixin, CreateView):
@@ -66,7 +86,7 @@ class QuestionDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
 
 
 class AnswerDetailView(DetailView):
-    model= Answer
+    model = Answer
     from_class = AnswerForm
     template_name = 'question_detail.html'
 
@@ -75,9 +95,10 @@ class AnswerDetailView(DetailView):
         return super().form_vaild(form)
     success_url = reverse_lazy('q_a:question-detail')
 
+
 class AnswerQuestion(CreateView):
-    model= Answer
-    form_class=AnswerForm
+    model = Answer
+    form_class = AnswerForm
     template_name = 'question-answer.html'
 
     def form_valid(self, form):
@@ -85,4 +106,3 @@ class AnswerQuestion(CreateView):
         form.instance.question_id = self.kwargs['pk']
         return super().form_valid(form)
     success_url = reverse_lazy('q_a:list')
-

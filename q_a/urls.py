@@ -10,5 +10,6 @@ urlpatterns = [
     path('questions/<int:pk>/update', views.QuestionUpdateView.as_view(), name="question-update"),
     path('questions/<int:pk>/delete', views.QuestionDeleteView.as_view(), name="question-delete"),
     path('questions/<int:pk>/answer', views.AnswerQuestion.as_view(), name="answer"),
+    path('vote/<int:pk>', views.vote_view, name='vote_post' )
 ]
 # use python format for href to avoid prefixes
