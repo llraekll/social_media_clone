@@ -34,25 +34,22 @@
                     <div class="line"></div>
                 </div>
                 <div class="nav-dropdown-menu">
-                    <a href="#" class="current-link">Home</a>
+                    <a href="/" class="current-link">Home</a>
                     <h5>Public</h5>
                     <ul class="nav-ul">
                         <li class="nav-item">
                             <i class="fas fa-globe-europe"></i>
                             <a href="" class="nav-link">R_Solutions</a>
                         </li>
-                        <li class="nav-item"><a href="#" class="nav-link">Tags</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Users</a></li>
+                        <li class="nav-item"><a href="https://stackoverflow.com/tags" class="nav-link">Tags</a></li>
+                        <li class="nav-item"><a href="https://stackoverflow.com/users" class="nav-link">Users</a></li>
                     </ul>
                     <h5>Find a Job</h5>
                     <ul class="nav-ul">
-                        <li class="nav-item"><a href="#" class="nav-link">Jobs</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Companies</a></li>
+                        <li class="nav-item"><a href="https://angel.co/jobs" class="nav-link">Jobs</a></li>
+                        <li class="nav-item"><a href="https://clutch.co/web-developers" class="nav-link">Companies</a></li>
                     </ul>
-                    <h5>Teams <a href="#" >What's this ?</a></h5>
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-briefcase"></i>
-                        <span>Free 30 Day Trial</span>
+                    
                     </a>
                 </div>
             </div>
@@ -69,8 +66,7 @@
         <div class="nav-base-links">
             <ul>
                 <li><a href="{% url 'base:about' %}">About</a></li>
-                <li><a href="#">Products</a></li>
-                <li><a href="#">For Teams</a></li>
+                <li><a href="https://stackoverflow.co/teams/">Products</a></li>
             </ul>
         </div>
         <div class="nav-search">
@@ -95,7 +91,7 @@
                     </div>
                 </div>
                 <div class="search-hint-footer">
-                    <a href="#" class="btn">Ask a question</a>
+                    <a href="{% url 'q_a:new-question' %}" class="btn">Ask a question</a>
                     <a href="#" class="search-help">Search help</a>
                 </div>
             </div>
@@ -165,7 +161,7 @@
                         </div>
                     </div>
                     <div class="jobs-btn">
-                        <div class="btn btn-orange jobs-btn">View all jobs</div>
+                        <div class="btn btn-orange jobs-btn"><a href="https://angel.co/jobs" class="btn">View all jobs</a></div>
                     </div>
             </div>
         </div>
@@ -183,93 +179,51 @@
             <div class="footer-nav-col">
                 <div class="footer-links-title"><a href="{% url 'base:home' %}">Stack Overflow</a></div>
                 <ul class="footer-links">
-                    <li class="footer-link-item"><a href="#" class="footer-link">Questions</a></li>
-                    <li class="footer-link-item"><a href="#" class="footer-link">Jobs</a></li>
-                    <li class="footer-link-item"><a href="#" class="footer-link">Developer Jobs Directory</a></li>
-                    <li class="footer-link-item"><a href="#" class="footer-link">Salary Calculator</a></li>
-                    <li class="footer-link-item"><a href="#" class="footer-link">Help</a></li>
-                    <li class="footer-link-item"><a href="#" class="footer-link">Mobile</a></li>
-                    <li class="footer-link-item"><a href="#" class="footer-link">Disable Responsiveness</a></li>
+                    <li class="footer-link-item"><a href="{% url 'q_a:list' %}" class="footer-link">Questions</a></li>
+                    <li class="footer-link-item"><a href="https://www.google.com/search?q=jobs&rlz=1C1VDKB_enIN1013IN1013&oq=jobs&aqs=chrome..69i57j35i39l2j0i131i433i512l2j69i60l2j69i61.1419j0j4&sourceid=chrome&ie=UTF-8&ibp=htl;jobs&sa=X&ved=2ahUKEwjR9KXV59_5AhVO_mEKHbvpCUUQutcGKAF6BAgEEAY&sxsrf=ALiCzsYc26jMaFwALDVdvwPcZg2CnyxYdQ:1661355537567#htivrt=jobs&htidocid=Cbx2_S8z6bsAAAAAAAAAAA%3D%3D&fpstate=tldetail" class="footer-link">Jobs</a></li>
+                    <li class="footer-link-item"><a href="https://angel.co/jobs" class="footer-link">Developer Jobs Directory</a></li>
+                    <li class="footer-link-item"><a href="https://www.ambitionbox.com/salaries/take-home-salary-calculator" class="footer-link">Salary Calculator</a></li>
+                    
                 </ul>
             </div>
             <div class="footer-nav-col">
                 <div class="footer-links-title"><a href="#">Products</a></div>
                 <ul class="footer-links">
-                    <li class="footer-link-item"><a href="#" class="footer-link">Teams</a></li>
-                    <li class="footer-link-item"><a href="#" class="footer-link">Talent</a></li>
-                    <li class="footer-link-item"><a href="#" class="footer-link">Advertising</a></li>
-                    <li class="footer-link-item"><a href="#" class="footer-link">Enterprise</a></li>
+                    <li class="footer-link-item"><a href="https://stackoverflow.co/teams/" class="footer-link">Teams</a></li>
+                    <li class="footer-link-item"><a href="https://stackoverflow.co/teams/" class="footer-link">Talent</a></li>
+                    <li class="footer-link-item"><a href="https://stackoverflow.co/advertising/" class="footer-link">Advertising</a></li>
+                    
                 </ul>
             </div>
             <div class="footer-nav-col">
-                <div class="footer-links-title"><a href="#">Company</a></div>
+                <div class="footer-links-title"><a href="https://mydukaan.io/">Company</a></div>
                 <ul class="footer-links">
-                    <li class="footer-link-item"><a href="#" class="footer-link">About</a></li>
-                    <li class="footer-link-item"><a href="#" class="footer-link">Press</a></li>
-                    <li class="footer-link-item"><a href="#" class="footer-link">Work Here</a></li>
-                    <li class="footer-link-item"><a href="#" class="footer-link">Legal</a></li>
-                    <li class="footer-link-item"><a href="#" class="footer-link">Privacy Policy</a></li>
-                    <li class="footer-link-item"><a href="#" class="footer-link">Contact Us</a></li>
+                    <li class="footer-link-item"><a href="{% url 'base:about' %}" class="footer-link">About</a></li>
+                   
                 </ul>
             </div>
-            <div class="footer-nav-col">
-                <div class="footer-links-title"><a href="#">Stack Exchange Network</a></div>
-                <ul class="footer-links">
-                    <li class="footer-link-item">
-                        <a href="#" class="footer-link">Technology</a>
-                        <div class="footer-arrow-icon">
-                            <i class="fas fa-chevron-right"></i>
-                        </div>
-                    </li>
-                    <li class="footer-link-item">
-                        <a href="#" class="footer-link">Life / Arts</a>
-                        <div class="footer-arrow-icon">
-                            <i class="fas fa-chevron-right"></i>
-                        </div></li>
-                    <li class="footer-link-item">
-                        <a href="#" class="footer-link">Culture / Recreation</a>
-                        <div class="footer-arrow-icon">
-                            <i class="fas fa-chevron-right"></i>
-                        </div>
-                    </li>
-                    <li class="footer-link-item">
-                        <a href="#" class="footer-link">Science</a>
-                        <div class="footer-arrow-icon">
-                            <i class="fas fa-chevron-right"></i>
-                        </div>
-                    </li>
-                    <li class="footer-link-item">
-                        <a href="#" class="footer-link">Other</a>
-                        <div class="footer-arrow-icon">
-                            <i class="fas fa-chevron-right"></i>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
+            
         <div class="footer-another-links">
             <div class="social-media">
                 <ul>
                     <li>
-                        <a href="#">Blog</a>
+                        <a href="https://mail.google.com/mail/u/0/?zx=jlz1x7f6zj0u#inbox?compose=GTvVlcSBnNZtJVLPzjGkvMvgcNdgHPGfCKsHLvwcNctjxSHzGKPMwNBlhpBRFHxxvtpZwjmbHMFdH">Contact Us</a>
                     </li>
                     <li>
-                        <a href="#">Facebook</a>
+                        <a href="https://github.com/llraekll">GitHub</a>
                     </li>
                     <li>
-                        <a href="#">Twitter</a>
+                        <a href="https://twitter.com/iiraekii">Twitter</a>
                     </li>
                     <li>
-                        <a href="#">LinkedIn</a>
+                        <a href="linkedin.com/in/rakshith-bh-111273128/">LinkedIn</a>
                     </li>
                     <li>
-                        <a href="#">Instagram</a>
+                        <a href="https://www.instagram.com/llraekll/">Instagram</a>
                     </li>
                 </ul>
             </div>
-            <div class="copyright">
-                <p>site design / logo © 2020 Stack Exchange Inc; user contributions licensed under <a href="https://stackoverflow.com/help/licensing">cc by-sa</a>. rev 2020.10.2.37725</p>
-            </div>
+            
         </div>
     </div>
 

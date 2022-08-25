@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from datetime import datetime
 from django.contrib.auth.models import User 
+from taggit.managers import TaggableManager
 
 # Create your models here.
 
@@ -14,6 +15,7 @@ class Question(models.Model):
     image = models.ImageField(null= True, blank=True, upload_to='post_images')
     created_at = models.DateTimeField(default=datetime.now)
     votes = models.ManyToManyField(User, related_name='question_post')
+    tags = TaggableManager()
     
 
     def __str__(self):

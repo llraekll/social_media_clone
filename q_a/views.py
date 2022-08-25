@@ -1,3 +1,4 @@
+from turtle import title
 from django.shortcuts import get_object_or_404
 from .models import Answer, Question
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -35,11 +36,19 @@ def vote_view_answer(request, pk):
 
 class Questions(ListView):
     model = Question
-    # template_name must be mentioned for class based views in django
+    # template_name must be mentioned for class based views in django V
     template_name = 'question_list.html'
-    # this is the name used for looping in html and for the .title & .description
+    # this is the name used for looping in html and for the .title & .description V
     context_object_name = 'questions'
     ordering = ['-created_at']
+
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        search_input = self.request.GET.get('search-area') or ""
+        if search_input:
+            context['questions'] = context['questions'].filter(title__icontains = search_input)
+            context['search_input'] = search_input
+        return context
 
 
 class QuestionDetailView(DetailView):
@@ -57,7 +66,14 @@ class QuestionDetailView(DetailView):
         context['total_votes'] = total_vote
         context['voted'] = voted
         return context
-
+        
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        search_input = self.request.GET.get('search-area') or ""
+        if search_input:
+            context['questions'] = context['questions'].filter(title__icontains = search_input)
+            context['search_input'] = search_input
+        return context
 
 class QuestionCreateView(LoginRequiredMixin, CreateView):
     model = Question
