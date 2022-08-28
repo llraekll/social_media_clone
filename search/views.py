@@ -1,4 +1,3 @@
-from turtle import title
 from django.shortcuts import render
 from users.models import User, Profile
 from itertools import chain
