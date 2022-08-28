@@ -1,10 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import auth
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .models import Profile
 from django.contrib.auth.decorators import login_required
-from q_a.models import Question
 from .forms import UserSignupForm, ProfileUpdateForm, UserUpdateForm
 
 # Create your views here.
@@ -109,7 +106,8 @@ def profile(request):
 def update_profile(request):
     if request.method == 'POST':
         user_update = UserUpdateForm(request.POST, instance=request.user)
-        profile_update = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        profile_update = ProfileUpdateForm(
+            request.POST, request.FILES, instance=request.user.profile)
         if user_update.is_valid() and profile_update.is_valid():
             user_update.save()
             profile_update.save()
@@ -117,8 +115,8 @@ def update_profile(request):
             return redirect('users:profile')
     else:
         user_update = UserUpdateForm(request.POST, instance=request.user)
-        profile_update = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
-    
+        profile_update = ProfileUpdateForm(
+            request.POST, request.FILES, instance=request.user.profile)
 
     forms = {
         'user_update': user_update,

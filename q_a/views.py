@@ -1,4 +1,3 @@
-from turtle import title
 from django.shortcuts import get_object_or_404
 from .models import Answer, Question
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
