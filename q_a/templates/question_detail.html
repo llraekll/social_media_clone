@@ -102,18 +102,12 @@
                             {% csrf_token %}
                             {% if user.is_authenticated %}
                                 {% if voted %}
-                                    {% if total_votes == 1 %}
                                     <div style="display: flex; align-items: center; margin-left: 10px;">
-                                        <button type="submit" name="question_id" value="{{ question.id }}" style="border: none; border-radius: 60px;"><img src="https://image.similarpng.com/very-thumbnail/2020/06/Dislike-icon-transparent-PNG.png" alt="" style="width: 40px;"></button> <h5 style="margin-left: 10px; cursor: pointer;"> |  {{ total_votes }} vote</h5>
-                                    </div>
-                                    {% else %}
-                                    <div style="display: flex; align-items: center; margin-left: 10px;">
-                                        <button type="submit" name="question_id" value="{{ question.id }}" style="border: none; border-radius: 60px;"><img src="https://image.similarpng.com/very-thumbnail/2020/06/Dislike-icon-transparent-PNG.png" alt="" style="width: 40px;"></button> <h5 style="margin-left: 10px; cursor: pointer;"> |  {{ total_votes }} votes</h5>
-                                    </div>
-                                    {% endif %}    
+                                        <button type="submit" name="question_id" value="{{ question.id }}" style="border: none; border-radius: 60px;"><img src="https://image.similarpng.com/very-thumbnail/2020/06/Dislike-icon-transparent-PNG.png" alt="" style="width: 40px;"></button> <h5 style="margin-left: 10px; cursor: pointer;">   {{ total_votes }} </h5>
+                                    </div>  
                                 {% else %}
                                     <div style="display: flex; align-items: center; margin-left: 10px;">
-                                        <button type="submit" name="question_id" value="{{ question.id }}" style="border: none; border-radius: 30px;"><img src="https://i.pinimg.com/originals/39/44/6c/39446caa52f53369b92bc97253d2b2f1.png" alt="" style="width: 40px;"></button> <h5 style="margin-left: 10px; cursor: pointer;"> |  {{ total_votes }} votes</h5>
+                                        <button type="submit" name="question_id" value="{{ question.id }}" style="border: none; border-radius: 30px;"><img src="https://i.pinimg.com/originals/39/44/6c/39446caa52f53369b92bc97253d2b2f1.png" alt="" style="width: 40px;"></button> <h5 style="margin-left: 10px; cursor: pointer;">   {{ total_votes }} </h5>
                                     </div>
                                 {% endif %}
                             {% else %}
@@ -124,40 +118,15 @@
                     
                     <h2>Answers-</h2> <br><br><br>
 
-                    {% if not question.answer.all %}
-                        <h3>No answers yet <a href="{% url 'q_a:answer' question.id %}">Answer Question</a> </h3>
+                    {% if not question.comment.all %}
+                        <h3>No Answers yet</h3>
                     {% else %}
-                        {% for answer in question.answer.all %}
-                            <h3 style="font-weight: normal; font-size: 15px;">{{answer.content|safe}}</h3>
-                            <h3 style="font-size: 10px;">Answered by: <i><a href="{% url 'users:profile' %}">{{answer.user}}</a> - On: {{answer.created_at|date:"F j, Y"}}</i></h3>
-                            <br>
-                            <form action="{% url 'q_a:vote_answer' answer.pk %}" method="POST">
-                                {% csrf_token %}
-                                {% if user.is_authenticated %}
-                                    {% if voted %}
-                                        {% if total_votes == 1 %}
-                                        <div style="display: flex; align-items: center; margin-left: 10px;">
-                                            <button type="submit" name="answer_id" value="{{ answer.id }}" style="border: none; border-radius: 60px;"><img src="https://image.similarpng.com/very-thumbnail/2020/06/Dislike-icon-transparent-PNG.png" alt="" style="width: 40px;"></button> <h5 style="margin-left: 10px; cursor: pointer;"> |  {{ total_votes }} vote</h5>
-                                        </div>
-                                        {% else %}
-                                        <div style="display: flex; align-items: center; margin-left: 10px;">
-                                            <button type="submit" name="answer_id" value="{{ answer.id }}" style="border: none; border-radius: 60px;"><img src="https://image.similarpng.com/very-thumbnail/2020/06/Dislike-icon-transparent-PNG.png" alt="" style="width: 40px;"></button> <h5 style="margin-left: 10px; cursor: pointer;"> |  {{ total_votes }} votes</h5>
-                                        </div>
-                                        {% endif %}    
-                                    {% else %}
-                                        <div style="display: flex; align-items: center; margin-left: 10px;">
-                                            <button type="submit" name="answer_id" value="{{ answer.id }}" style="border: none; border-radius: 30px;"><img src="https://i.pinimg.com/originals/39/44/6c/39446caa52f53369b92bc97253d2b2f1.png" alt="" style="width: 40px;"></button> <h5 style="margin-left: 10px; cursor: pointer;"> |  {{ total_votes }} votes</h5>
-                                        </div>
-                                    {% endif %}
-                                {% else %}
-                                    <h5 style="margin-left: 10px; cursor: pointer;"><a href="{% url 'users:signin' %}">Sign In</a> to vote Question |  {{ total_votes }} votes</h5>
-                                {% endif %}
-                            </form>
-                            <br>
+                        {% for comment in question.comment.all %}
+                            <h3 style="font-weight: normal; font-size: 15px;">{{comment.content|safe}}</h3>
+                            <h3 style="font-size: 10px;">Answered by: <i><a href="">{{comment.name}}</a> - On: {{comment.date_created|date:"j F, Y"}}</i></h3>
                             <hr>  
                         {% endfor %}
                     {% endif %}
-
 
 
                     <!-- {% if not questions.comments.all %}
@@ -189,8 +158,16 @@
                             <h5 style="margin-left: 10px; cursor: pointer;"><a href="">Login</a> to Like Question |  {{ total_likes }} Likes</h5>
                         {% endif %}
                     </form> -->
-                    
-                    <a class="btn btn-outline-primary" id="fa" href="{% url 'q_a:answer' question.id %}" style="text-decoration: none;">Answer Question</a>
+                    <br>
+                    <form action="{% url 'q_a:vote_question' question.pk %}" method="POST">
+                        {% csrf_token %}
+                        {% if user.is_authenticated %}
+                            <a class="btn btn-outline-primary" id="fa" href="{% url 'q_a:answer' question.id %}" style="text-decoration: none;">Answer Question</a>
+                        {% else %}
+                            <h5 style="margin-left: 10px; cursor: pointer;"><a href="{% url 'users:signin' %}">Sign In</a> to answer Question</h5>
+                        {% endif %}
+                    </form>
+                <br>    
                     <a style="text-decoration: none; " class="btn btn-outline-success" href="{% url 'q_a:question-update' question.id %}">&#x270E;</a>
                     <a style="text-decoration: none; " class="btn btn-outline-danger" href="{% url 'q_a:question-delete' question.id %}">&#x2716;</a>
                     <a style="text-decoration: none; " class="btn btn-outline-secondary" href="{% url 'q_a:list' %}">&#x21a9;</a>

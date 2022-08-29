@@ -11,7 +11,7 @@ urlpatterns = [
     path('questions/<int:pk>/delete', views.QuestionDeleteView.as_view(), name="question-delete"),
     path('questions/<int:pk>/answer', views.AnswerQuestion.as_view(), name="answer"),
     path('vote/question/<int:pk>', views.vote_view_question, name='vote_question'),
-    path('vote/answer/<int:pk>', views.vote_view_answer, name='vote_answer'),
+    # path('vote/answer/<int:pk>', views.vote_view_answer, name='vote_answer'),
 
 ]
 # use python format for href to avoid prefixes
