@@ -8,7 +8,7 @@
 # https://r-solutions.herokuapp.com/ 
 
 
-A python app built on the framework Django, this is a clone of stack overflow performing all the actions such as 
+A python app built on the framework Django, this is a clone of stack overflow performing CRUD operations-
 * User sign-up
 * User sign-in
 * User sign-out
@@ -34,6 +34,7 @@ This repo can be installed by following the steps below
 
 ![alt tag](https://github.com/llraekll/FastAPI/blob/main/images/Heroku.png)
 ### Deploy on Heroku
+WhiteNoise allows your web app to serve its own static files, making it a self-contained unit that can be deployed anywhere without relying on nginx, Amazon S3 or any other external service.
 ```bash
     pip install whitenoise
 ```
